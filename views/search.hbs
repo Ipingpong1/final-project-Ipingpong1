@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="/styles/main.css">
+
+<h1>SEARCH FOR A MAGIC CARD</h1>
+<form action="/search" method="POST">
+    <label for="cardName" style="font-size: larger;">Card Name:</label>
+	<input type="text" name="cardName" value="">
+	<input type="submit" value="Search">
+</form>
+
+<h3>{{card}}</h3>
+<img src={{cardImage}} alt="" style="border: 5px inset black;"> 
+<h2>Market Price (regular): {{price}} <a href={{tcglink}}>BUY NOW</a> </h2>
+<h2>Market Price (foil): {{price_foil}} <a href={{tcglink}}>BUY NOW</a> </h2>

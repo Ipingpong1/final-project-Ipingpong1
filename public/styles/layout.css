@@ -1,0 +1,48 @@
+body {
+    text-align: center;
+    background-color: #1b212c;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 48px;
+    background-color: burlywood;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: left;
+}
+
+a:link {
+    text-decoration: none;
+}
+a:hover {
+    color: #c2ebce;
+}
+a:visited {
+    color: #1b212c;
+}
+a {
+    color: #1b212c;
+}
+
+#homeNavButton{
+    background-color: #82846D;
+}
+#homeNavLink{
+    color: #1b212c;
+}
+
+#searchNavButton{
+    background-color: #95A472;
+}
+#searchNavLink{
+    color: #1b212c;
+}
+
+#decksNavButton{
+    background-color: #C8E087;
+}
+#decksNavLink{
+    color: #1b212c;
+}
