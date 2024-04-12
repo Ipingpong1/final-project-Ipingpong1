@@ -45,28 +45,30 @@ app.post('/search', (req, res) =>{
     const searchedCardName = req.body["cardName"];
     const searchedCardName_headered = searchedCardName.replaceAll(' ', '+')
     fetch("https://api.scryfall.com/cards/named?fuzzy="+searchedCardName_headered).then((response) => {
-        response.json().then((body) => {
-            const cardImageUrl = body["image_uris"]["normal"];
-            const cardPrice = body["prices"]["usd"];
-            const cardPrice_foil = body["prices"]["usd_foil"];
-            const buyUri = body["purchase_uris"]["tcgplayer"]
-            res.render('search', {
-                 card: `Oracle text (unformatted): ${body["oracle_text"]}`,
-                 cardImage: cardImageUrl, 
-                 price: cardPrice, 
-                 price_foil: cardPrice_foil, 
-                 tcglink: buyUri
-                });
-
-            const c = new Card({
-                name: searchedCardName,
-                manaCost: 100101, //WUBRGC
-                format: 0,
-                printing: "KLD",
-                image: cardImageUrl
-            })
-            c.save()
-
+        response.json().then( (body) => {
+            if(body["code"]!=='not_found'){
+                const cardImageUrl = body["image_uris"]["normal"];
+                const cardPrice = body["prices"]["usd"];
+                const cardPrice_foil = body["prices"]["usd_foil"];
+                const buyUri = body["purchase_uris"]["tcgplayer"];
+                res.render('search', {
+                    card: `Oracle text (unformatted): ${body["oracle_text"]}`,
+                    cardImage: cardImageUrl, 
+                    price: cardPrice, 
+                    price_foil: cardPrice_foil, 
+                    tcglink: buyUri
+                    });
+                const c = new Card({ //TODO: add card data dynamically
+                    name: searchedCardName,
+                    manaCost: 100101, //wubrgc
+                    format: 0,
+                    printing: "KLD",
+                    image: cardImageUrl
+                    });
+                c.save();
+            }else{
+                res.render('search', {card: "Card not found: Try Again."})
+            }
         });
     });
 });
