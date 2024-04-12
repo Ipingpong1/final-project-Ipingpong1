@@ -46,11 +46,13 @@ app.post('/search', (req, res) =>{
     const searchedCardName_headered = searchedCardName.replaceAll(' ', '+')
     fetch("https://api.scryfall.com/cards/named?fuzzy="+searchedCardName_headered).then((response) => {
         response.json().then( (body) => {
+            console.log(body)
             if(body["code"]!=='not_found'){
                 const cardImageUrl = body["image_uris"]["normal"];
                 const cardPrice = body["prices"]["usd"];
                 const cardPrice_foil = body["prices"]["usd_foil"];
                 const buyUri = body["purchase_uris"]["tcgplayer"];
+                const set = body["set"]
                 res.render('search', {
                     card: `Oracle text (unformatted): ${body["oracle_text"]}`,
                     cardImage: cardImageUrl, 
@@ -58,11 +60,11 @@ app.post('/search', (req, res) =>{
                     price_foil: cardPrice_foil, 
                     tcglink: buyUri
                     });
-                const c = new Card({ //TODO: add card data dynamically
+                const c = new Card({ 
                     name: searchedCardName,
-                    manaCost: 100101, //wubrgc
+                    manaCost: 100101, //TODO: convert mana values to number in CWUBRG order
                     format: 0,
-                    printing: "KLD",
+                    printing: set,
                     image: cardImageUrl
                     });
                 c.save();
