@@ -1,4 +1,4 @@
-# Lightweight Deck Builder and Collection Tracker for Magic the Gathering (better name TBD)
+# Lightweight Deck Builder and Collection Tracker for Magic the Gathering
 
 ## Overview
 
